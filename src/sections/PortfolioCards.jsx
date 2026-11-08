@@ -266,24 +266,6 @@ const PortfolioCards = () => {
 
   const activeImages = categories[active];
 
-  const touchStartX = useRef(0);
-  const startScrollLeft = useRef(0);
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-    startScrollLeft.current = carouselRef.current.scrollLeft;
-  };
-
-  const handleTouchMove = (e) => {
-    const diff = touchStartX.current - e.touches[0].clientX;
-
-    const limit = 100;
-
-    const movement = Math.max(-limit, Math.min(limit, diff));
-
-    carouselRef.current.scrollLeft = startScrollLeft.current + movement;
-  };
-
   const scroll = (direction) => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
@@ -315,8 +297,6 @@ const PortfolioCards = () => {
       <div
         ref={carouselRef}
         key={active}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
         className="
           flex flex-row
           gap-4 md:gap-5 lg:gap-6
